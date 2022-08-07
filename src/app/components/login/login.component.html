@@ -1,0 +1,10 @@
+<div>
+    <form [formGroup]="loginForm" (ngSubmit)="submit()">
+        <input name="email" type="email" placeholder="Email Address" formControlName="email" required />
+        <input name="password" type="password" placeholder="Password" formControlName="password" required />
+        <button type="submit">Log in</button>
+        <p>New? <a routerLink="/register">Click here to register</a></p>
+    </form>
+</div>
+
+<router-outlet></router-outlet>

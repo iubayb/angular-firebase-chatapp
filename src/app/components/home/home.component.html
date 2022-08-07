@@ -1,0 +1,27 @@
+<div class="container">
+    <span class="logout" (click)="logout()">🚶Log out</span>
+    <div class="wrapper users">
+        <div *ngFor="let user of users$ | async " (click)="selectChat
+        (user)">
+            {{user?.name}}
+        </div>
+    </div>
+    <div class="wrapper chat"  *ngIf="currentChat | async as Chat">
+        <div class="conversation">
+            <div *ngIf="user$ | async as user">
+                <div class="message" *ngFor="let message of messages$ | async" [ngClass]="{'cuser' : message.senderId === user.uid}">
+                    <div class="sender">{{message.sender}}</div>
+                    <div class="text">{{message.body}}</div>
+                    <div class="time">{{message.time | time}}</div>
+                </div>
+            </div>
+        </div>
+        <form class="textfield" (submit)="sendMessage($event)">
+            <input [formControl]="messageControl" placeholder="Type a message" />
+            <button type="submit" class="sendbtn"><svg viewBox="0 0 24 24" fill="white">
+                    <path d="M2.01 21 23 12 2.01 3 2 10l15 2-15 2z"></path>
+                </svg></button>
+        </form>
+    </div>
+    <span *ngIf="!currentChat" class="welcome">Choose a user from the list to start a realtime chat.</span>
+</div>
